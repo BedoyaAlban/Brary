@@ -65,7 +65,7 @@ router.get("/:id/edit", async (req, res) => {
 router.put("/:id", async (req, res) => {
   let author;
   try {
-    author = Author.findById(req.params.id);
+    author = await Author.findById(req.params.id);
     author.name = req.body.name;
     await author.save();
     res.redirect(`/authors/${author.id}`);
@@ -75,7 +75,7 @@ router.put("/:id", async (req, res) => {
     } else {
       res.render("authors/edit", {
         author: author,
-        errorMessage: "Error Updating Author"
+        errorMessage: "Error updating Author"
       });
     }
   }
