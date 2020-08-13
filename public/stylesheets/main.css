@@ -2,6 +2,9 @@
 @import "shared/variables.css";
 @import "shared/header.css";
 @import "shared/buttons.css";
+@import "shared/form.css";
+@import "shared/author.css";
+@import "shared/books.css";
 
 :root {
     font-family: "Vinson";
@@ -33,4 +36,8 @@ body {
 .page-hdr {
     font-size: 2rem;
     font-weight: 500;
+}
+
+.error-message {
+    color: hsl(356, 90%, 41%);
 }
