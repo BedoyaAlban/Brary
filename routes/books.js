@@ -81,14 +81,14 @@ router.put("/:id", async (req, res) => {
     book = await Book.findById(req.params.id);
     book.title = req.body.title;
     book.author = req.body.author;
-    book.publishDate = new Date(req.bodypublishDate);
+    book.publishDate = new Date(req.body.publishDate);
     book.pageCount = req.body.pageCount;
     book.description = req.bodydescription;
     if (req.body.cover != null && req.body.cover !== "") {
       saveCover(book, req.body.cover);
     }
     await book.save();
-    res.redirect(`books/${book.id}`);
+    res.redirect(`/books/${book.id}`);
   } catch {
     if (book != null) {
       renderEditPage(res, book, true);
@@ -148,7 +148,7 @@ function saveCover(book, coverEncoded) {
   if (coverEncoded == null) return;
   const cover = JSON.parse(coverEncoded);
   if (cover != null && imageMimeTypes.includes(cover.type)) {
-    book.coverImage = new Buffer(cover.data, "base64");
+    book.coverImage = Buffer.from(cover.data, "base64");
     book.coverImageType = cover.type;
   }
 }
