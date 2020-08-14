@@ -1,11 +1,26 @@
 const mongoose = require("mongoose");
 const Book = require("./book");
+const createDomPurify = require("dompurify");
+const { JSDOM } = require("jsdom");
+const dompurify = createDomPurify(new JSDOM().window);
 
 const authorSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
+  },
+  sanitizedName: {
+    type: String,
+    required: true
   }
+});
+
+authorSchema.pre("validate", function(next) {
+  if (this.name) {
+    this.sanitizedName = dompurify.sanitize(this.name);
+  }
+
+  next();
 });
 
 authorSchema.pre("remove", function(next) {

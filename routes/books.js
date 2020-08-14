@@ -135,7 +135,7 @@ async function renderFormPage(res, book, form, hasError = false) {
       if (form === "edit") {
         params.errorMessage = "Error updating book";
       } else {
-        params.errorMessage = "Error creaing book";
+        params.errorMessage = "Error creating book";
       }
     }
     res.render(`books/${form}`, params);
